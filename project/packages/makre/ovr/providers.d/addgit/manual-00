@@ -1,2 +1,2 @@
 main:
-	@cd ../../../../../;git add .;git commit -a
+	@cd ../../../../../../;git add .;git commit -a

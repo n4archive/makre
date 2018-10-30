@@ -40,6 +40,7 @@ init: .FORCERUN
 	-@touch project/files/.files
 	-@mkdir project/packages
 	-@mkdir project/packages/makre
+	-@echo "https://nift4.github.io/makre-packages/tar-files/" > project/packages/makre/sources.list
 	-@mkdir project/packages/makre/ovr
 	-@mkdir project/packages/makre/ovr/providers.d
 	-@touch project/packages/makre/ovr/providers.d/.providers.d
@@ -52,6 +53,15 @@ installraw: .FORCERUN
 	@for D in `find $(folder)/cfg/ -mindepth 1`;do cp -r $$D project/packages/$(name);done
 	@for D in `find $(folder)/ovr/ -mindepth 1`;do cp -r $$D project/packages/makre/ovr/;done
 	@cd packages/$(name);make install
+installtar: .FORCERUN
+	-@mkdir pti
+	@tar -C pti xf $(file)
+	@make installraw folder=pti name=$(name)
+	@rm -r pti
+install:
+	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name);done
+	@make installtar name=$(name) file=pkg.tar
+	@rm pkg.tar
 .FORCERUN:
 	@:
 %:
