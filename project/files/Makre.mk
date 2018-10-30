@@ -6,7 +6,7 @@ help: .FORCERUN
 	@echo 'project - Build the project'
 	@echo 'installraw - Install a package (Vars: name=NAME_OF_PKG folder=PKG_FOLDER )'
 	@echo 'init - Create a new project'
-	@if [ -d project/packages/makre/ovr/providers.desc.d/ ];then cd project/packages/makre/ovr/providers.desc.d/;for D in `find . -mindepth 1 -maxdepth 1 -type f`;do echo $$D;done;fi
+	@if [ -d project/packages/makre/ovr/providers.desc.d/ ];then cd project/packages/makre/ovr/providers.desc.d/;for D in `find . -mindepth 1 -maxdepth 1 -type f`;do D=$$D bash -c 'echo $${D:2} - `cat $$D`';done;fi
 project: .FORCERUN
 	@touch -d "1 minute ago" build/timestamp
 	@echo makre: \*** Starting build at `date`
@@ -43,6 +43,8 @@ init: .FORCERUN
 	-@mkdir project/packages/makre/ovr
 	-@mkdir project/packages/makre/ovr/providers.d
 	-@touch project/packages/makre/ovr/providers.d/.providers.d
+	-@mkdir project/packages/makre/ovr/providers.desc.d
+	-@touch project/packages/makre/ovr/providers.desc.d/.providers.desc.d
 installraw: .FORCERUN
 	-@mkdir packages/$(name)
 	-@mkdir project/packages/$(name)
