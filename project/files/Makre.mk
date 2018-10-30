@@ -55,11 +55,11 @@ installraw: .FORCERUN
 	@cd packages/$(name);make install
 installtar: .FORCERUN
 	-@mkdir pti
-	@tar -C pti xf $(file)
+	@cd pti;tar xf ../$(file)
 	@make installraw folder=pti name=$(name)
 	@rm -r pti
 install:
-	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name);done
+	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name).tar;done
 	@make installtar name=$(name) file=pkg.tar
 	@rm pkg.tar
 .FORCERUN:
