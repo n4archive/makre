@@ -62,6 +62,9 @@ install:
 	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name).tar;done
 	@make installtar name=$(name) file=pkg.tar
 	@rm pkg.tar
+purge:
+	-@cd packages/$(name);make remove
+	@rm -r packages/$(name) project/packages/$(name)
 .FORCERUN:
 	@:
 %:
