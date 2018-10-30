@@ -47,6 +47,8 @@ installraw: .FORCERUN
 	-@mkdir project/packages/$(name)
 	@for D in `find $(folder)/pkg/ -mindepth 1`;do cp -r $$D packages/$(name);done
 	@for D in `find $(folder)/cfg/ -mindepth 1`;do cp -r $$D project/packages/$(name);done
+	@for D in `find $(folder)/ovr/ -mindepth 1`;do cp -r $$D project/packages/makre/ovr/;done
+	@cd packages/$(name);make install
 .FORCERUN:
 	@:
 %:
