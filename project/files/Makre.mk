@@ -27,6 +27,7 @@ project: .FORCERUN
 	@rm build/timestamp
 	@echo makre: \*** Finished build at `date`
 init: .FORCERUN
+	-@touch project.mk
 	-@mkdir build
 	-@mkdir packages
 	-@mkdir build/tmp
