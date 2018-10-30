@@ -9,6 +9,8 @@ help: .FORCERUN
 project: .FORCERUN
 	@touch -d "1 minute ago" build/timestamp
 	@echo makre: \*** Starting build at `date`
+	@touch build/tmp/.tmp
+	@touch build/output/.output
 	@echo makre: \*** Starting pre-build
 	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Pre-building using $${PWD##*/};make --no-print-directory pre;echo makre: \*** Finished pre-build using $${PWD##*/};cd $$MAKRE_ROOT;done
 	@echo makre: \*** Finished pre-build
@@ -28,12 +30,16 @@ init: .FORCERUN
 	-@mkdir build
 	-@mkdir packages
 	-@mkdir build/tmp
+	-@touch build/tmp/.tmp
 	-@mkdir build/output
+	-@touch build/output/.output
 	-@mkdir project
 	-@mkdir project/files
+	-@touch project/files/.files
 	-@mkdir project/packages
 	-@mkdir project/packages/makre
 	-@mkdir project/packages/makre/providers.d
+	-@touch project/packages/makre/providers.d/.providers.d
 installraw: .FORCERUN
 	-@mkdir packages/$(name)
 	-@mkdir project/packages/$(name)
