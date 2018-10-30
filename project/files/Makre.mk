@@ -39,8 +39,9 @@ init: .FORCERUN
 	-@touch project/files/.files
 	-@mkdir project/packages
 	-@mkdir project/packages/makre
-	-@mkdir project/packages/makre/providers.d
-	-@touch project/packages/makre/providers.d/.providers.d
+	-@mkdir project/packages/makre/ovr
+	-@mkdir project/packages/makre/ovr/providers.d
+	-@touch project/packages/makre/ovr/providers.d/.providers.d
 installraw: .FORCERUN
 	-@mkdir packages/$(name)
 	-@mkdir project/packages/$(name)
@@ -49,4 +50,4 @@ installraw: .FORCERUN
 .FORCERUN:
 	@:
 %:
-	-@cd project/packages/makre/providers.d/$@&&for D in `find . -type f -mindepth 1`;do make -f $$D;done
+	-@cd project/packages/makre/ovr/providers.d/$@&&for D in `find . -type f -mindepth 1`;do make -f $$D;done
