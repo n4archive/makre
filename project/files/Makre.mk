@@ -5,6 +5,8 @@ help: .FORCERUN
 	@echo 'help - View this help'
 	@echo 'project - Build the project'
 	@echo 'installraw - Install a package (Vars: name=NAME_OF_PKG folder=PKG_FOLDER )'
+	@echo 'installtar - Install a package in a txz (Vars: name=NAME_OF_PKG file=PKG_FILE_TXZ)'
+	@echo 'install - Install a package from a repository. (Prefers up in sources.list)'
 	@echo 'init - Create a new project'
 	@if [ -d project/packages/makre/ovr/providers.desc.d/ ];then cd project/packages/makre/ovr/providers.desc.d/;for D in `find . ! -name .providers.desc.d -mindepth 1 -maxdepth 1 -type f`;do D=$$D bash -c 'echo $${D:2} - `cat $$D`';done;fi
 project: .FORCERUN
@@ -59,7 +61,7 @@ installtar: .FORCERUN
 	@make installraw folder=pti name=$(name)
 	@rm -r pti
 install: .FORCERUN
-	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name).tar;done
+	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name).tar;if [ -e;done
 	@make installtar name=$(name) file=pkg.tar
 	@rm pkg.tar
 purge: .FORCERUN
