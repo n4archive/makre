@@ -13,17 +13,17 @@ project: .FORCERUN
 	@touch build/tmp/.tmp
 	@touch build/output/.output
 	@echo makre: \*** Starting pre-build
-	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Pre-building using $${PWD##*/};make --no-print-directory pre;echo makre: \*** Finished pre-build using $${PWD##*/};cd $$MAKRE_ROOT;done
+	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Pre-building using $${PWD##*/};make --no-print-directory pre MAKRE_ROOT=$$MAKRE_ROOT;echo makre: \*** Finished pre-build using $${PWD##*/};cd $$MAKRE_ROOT;done
 	@echo makre: \*** Finished pre-build
 	@echo makre: \*** Starting build
-	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Building using $${PWD##*/};make --no-print-directory build;echo makre: \*** Finished build using $${PWD##*/};cd $$MAKRE_ROOT;done
+	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Building using $${PWD##*/};make --no-print-directory build MAKRE_ROOT=$$MAKRE_ROOT;echo makre: \*** Finished build using $${PWD##*/};cd $$MAKRE_ROOT;done
 	@echo makre: \*** Finished build
 	@echo makre: \*** Cleaning build system...
 	@find ./build/tmp -mindepth 1 ! -newer ./build/timestamp -delete
 	@find ./build/output -mindepth 1 ! -newer ./build/timestamp -delete
 	@echo makre: \*** Finished clean
 	@echo makre: \*** Starting post-build
-	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Post-building using $${PWD##*/};make --no-print-directory post;echo makre: \*** Finished postbuild using $${PWD##*/};cd $$MAKRE_ROOT;done
+	@MAKRE_ROOT=`pwd`;for D in `find ./packages/ -mindepth 1 -maxdepth 1 -type d`;do cd $$D;echo makre: \*** Post-building using $${PWD##*/};make --no-print-directory post MAKRE_ROOT=$MAKRE_ROOT;echo makre: \*** Finished postbuild using $${PWD##*/};cd $$MAKRE_ROOT;done
 	@echo makre: \*** Finished post-build
 	@rm build/timestamp
 	@echo makre: \*** Finished build at `date`
