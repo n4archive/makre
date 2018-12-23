@@ -61,7 +61,7 @@ installtar: .FORCERUN
 	@make installraw folder=pti name=$(name)
 	@rm -r pti
 install: .FORCERUN
-	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name).tar;[ -e pkg.tar ] && break || continue;done
+	@for SRC in `cat project/packages/makre/sources.list`;do wget -O pkg.tar $${SRC}/$(name).tar && break || continue;done
 	@make installtar name=$(name) file=pkg.tar
 	@rm pkg.tar
 purge: .FORCERUN
